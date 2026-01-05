@@ -1,7 +1,16 @@
+require('dotenv').config();
+const mongoose = require('mongoose');
+
 const express = require('express');
 const path = require('path');
 
 const app = express();
+
+mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
+});
 
 // View engine
 app.set('view engine', 'ejs');
